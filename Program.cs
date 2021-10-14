@@ -126,8 +126,8 @@ namespace TrOCR
                 IniHelper.SetValue("快捷键", "翻译文本", "F9");
                 IniHelper.SetValue("快捷键", "记录界面", "请按下快捷键");
                 IniHelper.SetValue("快捷键", "识别界面", "请按下快捷键");
-                IniHelper.SetValue("密钥_百度", "secret_id", "YsZKG1wha34PlDOPYaIrIIKO");
-                IniHelper.SetValue("密钥_百度", "secret_key", "HPRZtdOHrdnnETVsZM2Nx7vbDkMfxrkD");
+                IniHelper.SetValue("密钥_百度", "secret_id", "");
+                IniHelper.SetValue("密钥_百度", "secret_key", "");
                 IniHelper.SetValue("代理", "代理类型", "系统代理");
                 IniHelper.SetValue("代理", "服务器", "");
                 IniHelper.SetValue("代理", "端口", "");
@@ -220,12 +220,12 @@ namespace TrOCR
 
             if (IniHelper.GetValue("密钥_百度", "secret_id") == "发生错误")
             {
-                IniHelper.SetValue("密钥_百度", "secret_id", "YsZKG1wha34PlDOPYaIrIIKO");
+                IniHelper.SetValue("密钥_百度", "secret_id", "");
             }
 
             if (IniHelper.GetValue("密钥_百度", "secret_key") == "发生错误")
             {
-                IniHelper.SetValue("密钥_百度", "secret_key", "HPRZtdOHrdnnETVsZM2Nx7vbDkMfxrkD");
+                IniHelper.SetValue("密钥_百度", "secret_key", "");
             }
 
             if (IniHelper.GetValue("代理", "代理类型") == "发生错误")

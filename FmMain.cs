@@ -1067,6 +1067,7 @@ namespace TrOCR
 		public string Translate_Google(string text)
         {
 			var text2 = "";
+			var ggerror = "";
 			try
 			{
 				var text3 = "zh-CN";
@@ -1113,7 +1114,7 @@ namespace TrOCR
                 var data = string.Concat("client=gtx&sl=", text3, "&tl=", text4, "&dt=t&q=",
                     HttpUtility.UrlEncode(text)?.Replace("+", "%20"));
                 var html = CommonHelper.PostStrData("https://translate.googleapis.com/translate_a/single", data);
-
+				ggerror = html;
 				var jArray = (JArray)JsonConvert.DeserializeObject(html);
                 var count = ((JArray)jArray[0]).Count;
 				for (var i = 0; i < count; i++)
@@ -1123,7 +1124,7 @@ namespace TrOCR
 			}
 			catch (Exception)
 			{
-				text2 = "[谷歌接口报错]：\r\n1.网络错误或者文本过长。\r\n2.谷歌接口可能对于某些网络不能用，具体不清楚。可以尝试挂VPN试试。\r\n3.这个问题我没办法修复，请右键菜单更换百度、腾讯翻译接口。";
+				text2 = "[谷歌接口报错]：\r\n    "+ggerror;
 			}
 			return text2;
 		}
@@ -3584,6 +3585,7 @@ namespace TrOCR
 		private string TranslateBaidu(string content)
 		{
 			var text = "";
+			var bderror = "";
 			try
 			{
 				new CookieContainer();
@@ -3657,6 +3659,7 @@ namespace TrOCR
                 var url = "https://aip.baidubce.com/rpc/2.0/mt/texttrans/v1?access_token=" +
                               ((JObject)JsonConvert.DeserializeObject(baidu_vip))["access_token"];
                 var value = CommonHelper.PostUrl(url, message);
+				bderror = value;
                 var jArray = JObject.Parse(((JObject)JsonConvert.DeserializeObject(value))["result"].ToString());
                 var fan = JArray.Parse(jArray["trans_result"].ToString());
                 foreach (var arr in fan)
@@ -3667,7 +3670,7 @@ namespace TrOCR
             }
 			catch (Exception)
 			{
-				text = "[百度接口报错]：\r\n1.接口请求出现问题等待修复。";
+				text = "[百度接口报错]：\r\n1.接口请求出现问题等待修复。\r\n\r\n返回数据：\r\n	" + bderror;
 			}
 			return text;
 		}
@@ -3960,6 +3963,7 @@ namespace TrOCR
 		public string Translate_Googlekey(string text)
 		{
 			var text2 = "";
+			var ggerror = "";
 			try
 			{
 				var text3 = "zh-CN";
@@ -4004,7 +4008,9 @@ namespace TrOCR
 					}
 				}
 				var postData = string.Concat("client=gtx&sl=", text3, "&tl=", text4, "&dt=t&q=", HttpUtility.UrlEncode(text).Replace("+", "%20"));
-				var jArray = (JArray)JsonConvert.DeserializeObject(CommonHelper.PostStrData("https://translate.googleapis.com/translate_a/single", postData));
+				var value = CommonHelper.PostStrData("https://translate.googleapis.com/translate_a/single", postData);
+				ggerror = value;
+				var jArray = (JArray)JsonConvert.DeserializeObject(value);
 				var count = ((JArray)jArray[0]).Count;
 				for (var i = 0; i < count; i++)
 				{
@@ -4013,7 +4019,7 @@ namespace TrOCR
 			}
 			catch (Exception)
 			{
-				text2 = "[谷歌接口报错]：\r\n出现这个提示文字，表示您当前的网络不适合使用谷歌接口。\r\n请放弃使用谷歌接口，腾讯，百度接口都可以正常使用。";
+				text2 = "[谷歌接口报错]：\r\n    "+ggerror;
 			}
 			return text2;
 		}

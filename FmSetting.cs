@@ -455,8 +455,8 @@ namespace TrOCR
 
 		private void 密钥Button_Click(object sender, EventArgs e)
 		{
-			text_baiduaccount.Text = "YsZKG1wha34PlDOPYaIrIIKO";
-			text_baidupassword.Text = "HPRZtdOHrdnnETVsZM2Nx7vbDkMfxrkD";
+			text_baiduaccount.Text = "";
+			text_baidupassword.Text = "";
 		}
 
 		private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
